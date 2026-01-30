@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h3>新規アンケート作成</h3>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">アンケートタイトル</label>
+                    <input type="text" name="title" class="form-control" placeholder="例：好きな食べ物について" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">質問の追加へ進む</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
