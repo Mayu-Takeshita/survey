@@ -11,13 +11,14 @@ class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    questions = db.relationship('Question', backref='survey', lazy=True)
+    questions = db.relationship('Question', backref='survey',cascade="all, delete-orphan", lazy=True)
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
     survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'))
-    choices = db.relationship('Choice', backref='question', lazy=True)
+    choices = db.relationship('Choice', backref='question',cascade="all, delete-orphan", lazy=True)
+    answers = db.relationship('Answer', backref='question', cascade="all, delete-orphan", lazy=True)
 
 class Choice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,3 +30,5 @@ class Answer(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
     choice_id = db.Column(db.Integer, db.ForeignKey('choice.id'))
+
+

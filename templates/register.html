@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 shadow-lg border-0" style="border-radius: 20px;">
+            <h3 class="fw-bold text-center mb-4 text-dark">新規ユーザー登録</h3>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">お名前</label>
+                    <input type="text" name="username" class="form-control" style="border-radius: 10px;" placeholder="例：山田 太郎" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">メールアドレス</label>
+                    <input type="email" name="email" class="form-control" style="border-radius: 10px;" placeholder="example@mail.com" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 fw-bold" style="border-radius: 50px; padding: 12px;">アカウントを作成する</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="/" class="text-muted small">キャンセルして戻る</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
