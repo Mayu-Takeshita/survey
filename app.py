@@ -75,14 +75,23 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         
-        # ユーザーをデータベースに保存
-        new_user = User(username=username, email=email)
-        db.session.add(new_user)
-        db.session.commit()
+        # すでに登録されているかチェック
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            # 既にいる場合は、そのままトップへ（またはメッセージを出す）
+            return redirect(url_for('index'))
         
+        # 新規登録処理
+        try:
+            new_user = User(username=username, email=email)
+            db.session.add(new_user)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return "登録中にエラーが発生しました。"
+            
         return redirect(url_for('index'))
     return render_template('register.html')
-
 # --- 削除機能の追加 ---
 @app.route('/delete/<int:survey_id>', methods=['POST'])
 def delete_survey(survey_id):
